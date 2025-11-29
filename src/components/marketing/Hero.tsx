@@ -1,14 +1,30 @@
-export function Hero() {
+import { Button } from "@/components/app/ui/button";
+
+type HeroProps = {
+  title: string;
+  description: string;
+};
+
+export function Hero({ title, description }: HeroProps) {
   return (
-    <section className="py-24 text-center bg-gray-50">
-      <h1 className="text-4xl font-bold mb-4">あなたのサービスを一言で</h1>
-      <p className="text-lg text-gray-600 mb-6">
-        ここにサービスの短い説明文が入ります。
+    <div className="text-center max-w-5xl mx-auto py-24">
+      <h1 className="text-4xl md:text-6xl font-bold mb-6">
+        <span className="text-blue-600">{title}</span>
+      </h1>
+
+      <p className="text-lg md:text-xl text-gray-600 mb-10">
+        {description}
       </p>
 
-      <button className="px-6 py-3 bg-black text-white rounded-full hover:bg-gray-800">
-        お問い合わせ
-      </button>
-    </section>
+      <div className="flex flex-wrap justify-center gap-4">
+        <Button size="lg" className="bg-blue-600 hover:bg-blue-700" asChild>
+          <a href="#contact">無料相談する</a>
+        </Button>
+
+        <Button size="lg" variant="outline" asChild>
+          <a href="#feature">できることを見る</a>
+        </Button>
+      </div>
+    </div>
   );
 }
