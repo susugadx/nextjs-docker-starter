@@ -5,6 +5,10 @@ module.exports = {
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    container: {  // ← これを追加
+      center: true,  // ← 自動で中央寄せ
+      padding: "1rem",  // ← 左右のpadding
+    },
     extend: {
       colors: {
         border: "hsl(var(--border))",
