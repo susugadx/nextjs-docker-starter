@@ -1,15 +1,19 @@
 import { Button } from "@/components/app/ui/button";
 
-export function Hero() {
+type HeroProps = {
+  title: string;
+  description: string;
+};
+
+export function Hero({ title, description }: HeroProps) {
   return (
-    <div className="text-center max-w-5xl mx-auto">
+    <div className="text-center max-w-5xl mx-auto py-24">
       <h1 className="text-4xl md:text-6xl font-bold mb-6">
-        あなたのビジネスを加速させる
-        <span className="text-blue-600"> Web制作</span>
+        <span className="text-blue-600">{title}</span>
       </h1>
 
       <p className="text-lg md:text-xl text-gray-600 mb-10">
-        Next.js / Tailwind CSS / shadcn/ui を使用した高速で美しいWebサイトを。
+        {description}
       </p>
 
       <div className="flex flex-wrap justify-center gap-4">

@@ -1,20 +1,12 @@
-import { Header } from "@/components/marketing/Header";
-import { Hero } from "@/components/marketing/Hero";
-import { HeroTwoColumn } from "@/components/marketing/HeroTwoColumn";
-import { Section } from "@/components/marketing/Section";
+import { Hero } from '@/components/marketing/Hero'
 
-export default function Page() {
+export default function Home() {
   return (
     <div>
-      <Header />
-      
-      <Section>
-        <Hero />
-      </Section>
-
-      <Section className="bg-gray-50">
-        <HeroTwoColumn />
-      </Section>
+      <Hero
+        title="Next.js Starter Kit"
+        description="Build amazing web applications with Next.js, TypeScript, and Tailwind CSS"
+      />
     </div>
-  );
+  )
 }
