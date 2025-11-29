@@ -1,16 +1,12 @@
-// src/app/page.tsx
-import { HeroTwoColumn } from "@/components/marketing/HeroTwoColumn";
-import { Hero } from "@/components/marketing/Hero";
-import { Header } from "@/components/marketing/Header";
+import { Hero } from '@/components/marketing/Hero'
 
-export default function Page() {
-    return (
-      <div>
-        <main className="min-h-screen p-8">
-        <Header />
-        <Hero />
-        <HeroTwoColumn />
-        </main>
-      </div>
-    );
+export default function Home() {
+  return (
+    <div>
+      <Hero
+        title="Next.js Starter Kit"
+        description="Build amazing web applications with Next.js, TypeScript, and Tailwind CSS"
+      />
+    </div>
+  )
 }
