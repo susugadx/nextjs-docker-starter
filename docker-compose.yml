@@ -1,12 +1,105 @@
 version: "3.9"
 
 services:
+  # ====================================
+  # Next.js (Frontend)
+  # ====================================
   web:
-    build: .
-    container_name: nextjs_app
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: nextjs_web
     ports:
       - "3000:3000"
     volumes:
       - .:/app
       - /app/node_modules
+      - /app/.next
+    environment:
+      - NODE_ENV=development
+      - DATABASE_URL=postgresql://postgres:postgres@db:5432/nextjs_dev
+      - REDIS_URL=redis://redis:6379
+    depends_on:
+      - db
+      - redis
     command: npm run dev
+    networks:
+      - app-network
+
+  # ====================================
+  # PostgreSQL (Database)
+  # ====================================
+  db:
+    image: postgres:16-alpine
+    container_name: nextjs_db
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: nextjs_dev
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - app-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ====================================
+  # Redis (Cache)
+  # ====================================
+  redis:
+    image: redis:7-alpine
+    container_name: nextjs_redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - app-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+
+  # ====================================
+  # Go API (Backend) - 将来用
+  # ====================================
+  # 現在はコメントアウト
+  # AI学習ノート開発時に有効化
+  # 
+  # backend:
+  #   build:
+  #     context: ./backend
+  #     dockerfile: Dockerfile
+  #   container_name: nextjs_backend
+  #   ports:
+  #     - "8080:8080"
+  #   environment:
+  #     - DATABASE_URL=postgresql://postgres:postgres@db:5432/nextjs_dev
+  #     - REDIS_URL=redis://redis:6379
+  #   depends_on:
+  #     - db
+  #     - redis
+  #   networks:
+  #     - app-network
+
+# ====================================
+# Volumes
+# ====================================
+volumes:
+  postgres_data:
+    driver: local
+  redis_data:
+    driver: local
+
+# ====================================
+# Networks
+# ====================================
+networks:
+  app-network:
+    driver: bridge

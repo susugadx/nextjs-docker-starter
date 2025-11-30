@@ -2,9 +2,10 @@ import { Header } from '@/components/marketing/Header'
 import { Hero } from '@/components/marketing/Hero'
 import { Footer } from '@/components/marketing/Footer'
 import { Section } from '@/components/marketing/Section'
-import { Button } from '@/components/app/ui/button'
-import { Input } from '@/components/app/ui/input'
-import { Label } from '@/components/app/ui/label'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import { PricingSection } from '@/components/marketing/PricingCard'
 
 export default function PlaygroundPage() {
   return (
@@ -37,6 +38,14 @@ export default function PlaygroundPage() {
             title="Next.js Starter Kit"
             description="Build amazing web applications with Next.js, TypeScript, and Tailwind CSS"
           />
+        </div>
+      </Section>
+
+      {/* Pricing Cards */}
+      <Section>
+        <h2 className="text-2xl font-bold mb-4">Pricing Cards</h2>
+        <div className="border rounded-lg overflow-hidden bg-gray-50">
+          <PricingSection />
         </div>
       </Section>
 
