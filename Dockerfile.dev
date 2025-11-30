@@ -5,9 +5,16 @@ FROM node:20-alpine
 
 WORKDIR /app
 
+# Alpine用の依存関係
+RUN apk add --no-cache libc6-compat
+
 # Install dependencies
 COPY package.json package-lock.json* ./
 RUN npm install
+
+# Prisma Client を生成
+COPY prisma ./prisma
+RUN npx prisma generate
 
 # Copy application code
 COPY . .

@@ -15,13 +15,18 @@ services:
       - .:/app
       - /app/node_modules
       - /app/.next
+      - /app/node_modules/.prisma
+    env_file:
+      - .env
     environment:
-      - NODE_ENV=development
+      # Docker内ではホスト名を上書き
       - DATABASE_URL=postgresql://postgres:postgres@db:5432/nextjs_dev
       - REDIS_URL=redis://redis:6379
     depends_on:
-      - db
-      - redis
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
     command: npm run dev
     networks:
       - app-network
@@ -65,28 +70,6 @@ services:
       interval: 10s
       timeout: 3s
       retries: 5
-
-  # ====================================
-  # Go API (Backend) - 将来用
-  # ====================================
-  # 現在はコメントアウト
-  # AI学習ノート開発時に有効化
-  # 
-  # backend:
-  #   build:
-  #     context: ./backend
-  #     dockerfile: Dockerfile
-  #   container_name: nextjs_backend
-  #   ports:
-  #     - "8080:8080"
-  #   environment:
-  #     - DATABASE_URL=postgresql://postgres:postgres@db:5432/nextjs_dev
-  #     - REDIS_URL=redis://redis:6379
-  #   depends_on:
-  #     - db
-  #     - redis
-  #   networks:
-  #     - app-network
 
 # ====================================
 # Volumes
