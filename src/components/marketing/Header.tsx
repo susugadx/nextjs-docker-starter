@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Button } from '@/components/app/ui/button'
+import { Button } from '@/components/ui/button'
 
 type HeaderProps = {
   siteName: string;

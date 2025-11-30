@@ -1,4 +1,4 @@
-import { Button } from "@/components/app/ui/button";
+import { Button } from "@/components/ui/button";
 
 type HeroProps = {
   title: string;
