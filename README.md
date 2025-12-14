@@ -169,11 +169,9 @@ nextjs-docker-starter/
 │   │   ├── auth/
 │   │   │   └── signin/
 │   │   │       └── page.tsx     # サインインページ
-│   │   ├── playground/
-│   │   │   └── page.tsx         # コンポーネントテスト用
+│   │   ├── globals.css          # グローバルスタイル
 │   │   ├── layout.tsx           # ルートレイアウト
 │   │   ├── page.tsx             # トップページ
-│   │   ├── globals.css          # グローバルスタイル
 │   │   └── providers.tsx        # Providerラッパー
 │   ├── components/
 │   │   ├── auth/                # 認証関連コンポーネント（準備済み）
